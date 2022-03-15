@@ -22,6 +22,12 @@ html {
     --celeste-notification: #8EDAFC;
 }
 
+i {
+    font-size: 1.5em;
+    color: var(--gray-text);
+    cursor: pointer;
+}
+
 /* style */
 
 
@@ -66,4 +72,67 @@ body {
     max-width: 60%;
     height: 100%;
     border: 1px solid black;
+}
+
+/* side-bar */
+
+/* user account */
+
+.side-bar>* {
+    width: 100%;
+}
+
+.side-bar .user-account {
+    height: 4rem;
+    background-color: var(--gray);
+
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.user-image {
+    border-radius: 50%;
+    height: 100%;
+    margin-right: 0.5rem;
+}
+
+.icons {
+    margin-left: auto;
+}
+
+.icons .fa-solid {
+    margin: 0 0.5rem;
+}
+
+/* notifications */
+
+.notification {
+    height: 5rem;
+    background-color: var(--celeste-notification);
+
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.icon-notif {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+    padding: 1rem;
+    margin: 0 0.5rem;
+
+    background-color: var(--white);
+}
+
+.icon-notif .fa-bell-slash {
+    color: var(--celeste-notification);
+}
+
+.active-notif {
+    color: #568093;
 }
