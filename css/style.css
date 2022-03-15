@@ -15,7 +15,7 @@ html {
 
 :root {
     --green-back: #009688;
-    --gray: #DBDBD3;
+    --gray: #e7e7e4;
     --white: #FFFFFF;
     --green-message: #D5F9BA;
     --gray-text: #999AA0;
@@ -44,6 +44,8 @@ body {
     width: 100%;
     height: 100vh;
     position: relative;
+    background-color: #D4DBD9;
+
 }
 
 /* app */
@@ -55,25 +57,26 @@ body {
     left: 50%;
     transform: translate(-50%);
 
-    border: 1px solid black;
+    /* border: 1px solid black; */
 
-    width: 1400px;
+    min-width: 1400px;
     height: calc(100vh - 4rem);
-    /* height: 90vh; */
     display: flex;
 }
 
 .side-bar {
     width: 40%;
     height: 100%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     overflow: hidden;
 }
 
 .content-bar {
-    max-width: 60%;
+    width: 60%;
     height: 100%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
+
+    position: relative;
 }
 
 /* side-bar */
@@ -125,7 +128,7 @@ body {
     align-items: center;
 
     border-radius: 50%;
-    padding: 1.5rem;
+    padding: 1rem 0.8rem;
     margin: 0 0.5rem;
 
     background-color: var(--white);
@@ -144,11 +147,13 @@ body {
 .search-friend {
     display: flex;
     padding: 0.8rem;
+    background-color: rgb(245, 243, 243);
 }
 
 .search-friend .icon-search {
     padding: 0.5rem 1rem;
     border: 1px solid var(--gray);
+    background-color: var(--white);
 }
 
 .search-friend .input-search {
@@ -167,40 +172,104 @@ body {
     overflow-y: scroll;
 }
 
-.friend {
+.friend-bar .friend {
     height: 5rem;
     display: flex;
 
-    padding: 1rem 0.2rem;
-    margin: 0 0.5rem;
+    padding: 1rem 0.5rem;
+    /* margin: 0 0.5rem; */
 
     background-color: var(--white);
+
+    border-bottom: 1px solid var(--gray);
 }
 
-.friend-details {
+.friend-bar .friend-details {
     position: relative;
     width: 100%;
 
     padding-left: 0.5rem;
 }
 
-.friend img {
+.friend-bar .friend img {
     height: 100%;
     border-radius: 50%;
 }
 
-.friend-name {
+.friend-bar .friend-name {
     font-size: 1.3em;
     padding-bottom: 0.3rem;
 }
 
-.friend .last-message {
+.friend-bar .last-message {
     color: var(--gray-text);
 }
 
-.friend .time-message {
+.friend-bar .time-message {
     position: absolute;
     top: 0;
     right: 0;
     color: var(--gray-text);
+}
+
+/* content bar */
+
+.content-bar>* {
+    width: 100%;
+}
+
+.content-bar .friend-selected,
+.content-bar .text-inner-message {
+    height: 4rem;
+    padding: 0.7rem;
+    background-color: var(--gray);
+    display: flex;
+    align-items: center;
+}
+
+
+.content-bar img {
+    height: 100%;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+}
+
+.content-bar .friend-name {
+    font-size: 1.2em;
+}
+
+.content-bar .last-message {
+    color: var(--gray-text);
+}
+
+.content-bar .icons-selected-user {
+    margin-left: auto;
+}
+
+.content-bar .icons-selected-user .fa-solid {
+    margin: 0 0.5rem;
+}
+
+/* content message */
+
+.content-bar .content-message {
+    height: calc(100% - 8rem);
+
+    background-image: url(../img/mine.jpg);
+}
+
+/* text inner message */
+
+.content-bar .fa-solid {
+    margin: 0 1.5rem;
+    font-size: 2em;
+}
+
+.content-bar .text-message {
+    height: 100%;
+    width: 100%;
+    border: transparent;
+    border-radius: 7px;
+    padding: 0.5rem;
+    font-size: 1em;
 }
