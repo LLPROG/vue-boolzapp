@@ -167,9 +167,10 @@ body {
 /* friend bar */
 
 .friend-bar {
-    height: 74%;
-    padding-bottom: 0.2rem;
+    height: calc(100% - 228.59px);
     overflow-y: scroll;
+    background-color: var(--white);
+
 }
 
 .friend-bar .friend {
@@ -181,7 +182,7 @@ body {
 
     background-color: var(--white);
 
-    border-bottom: 1px solid var(--gray);
+    border-top: 1px solid var(--gray);
 }
 
 .friend-bar .friend-details {
@@ -221,12 +222,16 @@ body {
 .content-bar .friend-selected,
 .content-bar .text-inner-message {
     height: 4rem;
-    padding: 0.7rem;
     background-color: var(--gray);
     display: flex;
     align-items: center;
+
+    border-left: 1px solid var(--gray-text);
 }
 
+.content-bar .friend-selected {
+    padding: 0.7rem;
+}
 
 .content-bar img {
     height: 100%;
@@ -254,15 +259,56 @@ body {
 
 .content-bar .content-message {
     height: calc(100% - 8rem);
-
     background-image: url(../img/mine.jpg);
+    display: flex;
+
+    padding: 5rem;
+    overflow-y: scroll;
+}
+
+.content-message .row-message {
+    border: 1px solid black;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-message .user-message {
+    padding: 1rem;
+    background-color: var(--green-message);
+
+    border-radius: 10px;
+    width: 20rem;
+    margin-bottom: 10px;
+
+    margin-left: auto;
+
+}
+
+.content-message .not-user-message {
+    padding: 1rem;
+    background-color: white;
+
+    border-radius: 10px;
+    width: 20rem;
+    margin-bottom: 10px;
+}
+
+/* class for vue*/
+.user-direction {
+    margin-left: auto;
 }
 
 /* text inner message */
 
-.content-bar .fa-solid {
+.content-bar .text-inner-message {
+    padding: 0.5rem 0;
+}
+
+.content-bar .fa-solid,
+.content-bar .fa-regular {
     margin: 0 1.5rem;
-    font-size: 2em;
+    font-size: 1.7em;
 }
 
 .content-bar .text-message {

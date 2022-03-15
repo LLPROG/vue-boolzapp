@@ -16,6 +16,7 @@
     </div>
 
     <div id="app">
+
         <!-- side-bar -->
         <div class="side-bar">
 
@@ -63,153 +64,20 @@
             <!-- friend bar -->
             <div class="friend-bar">
 
-                <div class="friend">
-                    <img src="img/avatar_1.jpg" alt="avatar 1">
+                <div class="friend" v-for="(user, index) in arrFriends" @click="selectUser(index)">
+                    <img :src="'img/' + user.image" alt="avatar 1">
 
                     <div class="friend-details">
                         <div class="friend-name">
-                            Michele
+                           {{user.name}}
                         </div>
 
                         <div class="last-message">
-                            Ultimo messaggio inviato
+                            {{user.lastMessage}}
                         </div>
 
                         <div class="time-message">
-                            12.00
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="friend">
-                    <img src="img/avatar_2.jpg" alt="avatar 1">
-
-                    <div class="friend-details">
-                        <div class="friend-name">
-                            Fabio
-                        </div>
-
-                        <div class="last-message">
-                            Ultimo messaggio inviato
-                        </div>
-
-                        <div class="time-message">
-                            12.00
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="friend">
-                    <img src="img/avatar_3.jpg" alt="avatar 1">
-
-                    <div class="friend-details">
-                        <div class="friend-name">
-                            Samuele
-                        </div>
-
-                        <div class="last-message">
-                            Ultimo messaggio inviato
-                        </div>
-
-                        <div class="time-message">
-                            12.00
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="friend">
-                    <img src="img/avatar_4.jpg" alt="avatar 1">
-
-                    <div class="friend-details">
-                        <div class="friend-name">
-                            Alessandro B.
-                        </div>
-
-                        <div class="last-message">
-                            Ultimo messaggio inviato
-                        </div>
-
-                        <div class="time-message">
-                            12.00
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="friend">
-                    <img src="img/avatar_5.jpg" alt="avatar 1">
-
-                    <div class="friend-details">
-                        <div class="friend-name">
-                            Alessandro L.
-                        </div>
-
-                        <div class="last-message">
-                            Ultimo messaggio inviato
-                        </div>
-
-                        <div class="time-message">
-                            12.00
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="friend">
-                    <img src="img/avatar_6.jpg" alt="avatar 1">
-
-                    <div class="friend-details">
-                        <div class="friend-name">
-                            Claudia
-                        </div>
-
-                        <div class="last-message">
-                            Ultimo messaggio inviato
-                        </div>
-
-                        <div class="time-message">
-                            12.00
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="friend">
-                    <img src="img/avatar_7.jpg" alt="avatar 1">
-
-                    <div class="friend-details">
-                        <div class="friend-name">
-                            Federico
-                        </div>
-
-                        <div class="last-message">
-                            Ultimo messaggio inviato
-                        </div>
-
-                        <div class="time-message">
-                            12.00
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="friend">
-                    <img src="img/avatar_8.jpg" alt="avatar 1">
-
-                    <div class="friend-details">
-                        <div class="friend-name">
-                            Davide
-                        </div>
-
-                        <div class="last-message">
-                            Ultimo messaggio inviato
-                        </div>
-
-                        <div class="time-message">
-                            12.00
+                            {{user.timeAccess}}
                         </div>
                     </div>
 
@@ -244,15 +112,15 @@
             <!-- friend selected -->
             <div class="friend-selected">
 
-                <img src="img/avatar_1.jpg" alt="avatar 1">
+                <img :src="'img/' + arrFriends[selectUserIndex].image" alt="avatar selected">
 
                 <div class="friend-details">
                     <div class="friend-name">
-                        Michele
+                        {{arrFriends[selectUserIndex].name}}
                     </div>
 
                     <div class="last-message">
-                        Ultimo messaggio inviato alle 12.00
+                        {{arrFriends[selectUserIndex].lastMessage + ' alle ' + arrFriends[selectUserIndex].timeAccess}}
                     </div>
                 </div>
 
@@ -267,12 +135,33 @@
 
             <!-- content message -->
             <div class="content-message">
+                <div class="row-message">
+
+                    <div class="user-message">
+                        hai portato a spasso il cane?
+                    </div>
+
+
+                    <div class="not-user-message">
+                        tutto fatto!
+                    </div>
+
+                    
+                    <div class="user-message">
+                        hai portato a spasso il cane?
+                    </div>
+
+                    <div class="not-user-message">
+                        tutto fatto!
+                    </div>
+
+                </div>
 
             </div>
 
             <!-- text inner message -->
             <div class="text-inner-message">
-                <i class="fa-solid fa-face-smile"></i>
+                <i class="fa-regular fa-face-smile"></i>
                 <input type="text" class="text-message" placeholder="Scrivi un messaggio">
                 <i class="fa-solid fa-microphone"></i>
             </div>
