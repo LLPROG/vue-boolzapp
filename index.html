@@ -64,7 +64,7 @@
             <!-- friend bar -->
             <div class="friend-bar">
 
-                <div class="friend" v-for="(user, index) in arrFriends" @click="selectUser(index)">
+                <div class="friend" v-for="(user, index) in arrFriends" @click="selectUser(index)" :class="selectUserIndex == index ? 'back-color' : '' ">
                     <img :src="'img/' + user.image" alt="avatar 1">
 
                     <div class="friend-details">
@@ -83,27 +83,8 @@
 
                 </div>
 
-                <!-- <div class="friend">
-                    <img src="img/avatar_8.jpg" alt="avatar 1">
-
-                    <div class="friend-details">
-                        <div class="friend-name">
-                            Davide
-                        </div>
-
-                        <div class="last-message">
-                            Ultimo messaggio inviato
-                        </div>
-
-                        <div class="time-message">
-                            12.00
-                        </div>
-                    </div>
-
-                </div> -->
-
-
             </div>
+
         </div>
 
         <!-- content-bar -->
