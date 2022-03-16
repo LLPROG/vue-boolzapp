@@ -1,7 +1,12 @@
 const app = new Vue({
     el: '#app',
     data: {
-        userValue: '',
+        function: false,
+        object: {
+            message: true,
+            text: '',
+        },
+        
         userInput: '',
         friendInput: '',
         selectUserIndex: 0,
@@ -21,6 +26,10 @@ const app = new Vue({
                         message: false,
                         text: 'come stai'
                     },
+                    {
+                        message: true,
+                        text: 'bene, tu?'
+                    },
                 ]
                 
             },
@@ -30,6 +39,16 @@ const app = new Vue({
                 lastMessage: 'ultimo messaggio',
                 timeAccess: '12.00',
                 image: 'avatar_2.jpg',
+                messages: [
+                    {
+                        message: true,
+                        text: 'ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao '
+                    },
+                    {
+                        message: false,
+                        text: 'come stai'
+                    },
+                ]
                 
 
             },
@@ -39,6 +58,7 @@ const app = new Vue({
                 lastMessage: 'ultimo messaggio',
                 timeAccess: '12.00',
                 image: 'avatar_3.jpg',
+                messages: [],
                 
 
             },
@@ -48,6 +68,7 @@ const app = new Vue({
                 lastMessage: 'ultimo messaggio',
                 timeAccess: '12.00',
                 image: 'avatar_4.jpg',
+                messages: [],
                 
 
             },
@@ -57,6 +78,7 @@ const app = new Vue({
                 lastMessage: 'ultimo messaggio',
                 timeAccess: '12.00',
                 image: 'avatar_5.jpg',
+                messages: [],
                 
 
             },
@@ -66,6 +88,7 @@ const app = new Vue({
                 lastMessage: 'ultimo messaggio',
                 timeAccess: '12.00',
                 image: 'avatar_6.jpg',
+                messages: [],
                 
 
             },
@@ -75,6 +98,7 @@ const app = new Vue({
                 lastMessage: 'ultimo messaggio',
                 timeAccess: '12.00',
                 image: 'avatar_7.jpg',
+                messages: [],
 
             },
             {
@@ -83,6 +107,7 @@ const app = new Vue({
                 lastMessage: 'ultimo messaggio',
                 timeAccess: '12.00',
                 image: 'avatar_8.jpg',
+                messages: [],
                 
 
             },
@@ -94,14 +119,30 @@ const app = new Vue({
             this.selectUserIndex += index;
         },
         sendMessage() {
-            this.userInput = this.userValue;
-            this.userValue = '';
+            this.function = true
+            this.arrFriends[this.selectUserIndex].messages.push({...this.object});
+            this.object.text = '';
 
-            if (this.userInput != '') {
-                this.friendInput = 'si tanto!'
-            }
-        }
-    }
+
+        },
+        timeout() {
+            setTimeout(() => {
+                this.object.message = false;
+                this.object.text = 'ok!';
+
+                this.arrFriends[this.selectUserIndex].messages.push({...this.object});
+                
+                this.object.message = true;
+                this.object.text = '';
+                this.function = false
+            }, 1000)
+
+        },
+        functions() {
+            this.sendMessage();
+            this.timeout()
+        },
+    },
 })
 
 
