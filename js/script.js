@@ -1,10 +1,12 @@
 const app = new Vue({
     el: '#app',
     data: {
+        now: luxon.DateTime.now().toLocaleString(),
         function: false,
         object: {
             message: true,
             text: '',
+            timeMessage: luxon.DateTime.now().toLocaleString(this.now),
         },
         
         userInput: '',
@@ -14,21 +16,24 @@ const app = new Vue({
             {
                 id: 0,
                 name: 'Michele',
-                lastMessage: 'ultimo messaggio',
-                timeAccess: '12.00',
+                lastMessage: '',
+                timeAccess: luxon.DateTime.now().toLocaleString(this.now) ,
                 image: 'avatar_1.jpg',
                 messages: [
                     {
                         message: true,
-                        text: 'ciao'
+                        text: 'ciao',
+                        timeMessage: luxon.DateTime.now().toLocaleString(this.now),
                     },
                     {
                         message: false,
-                        text: 'come stai'
+                        text: 'come stai',
+                        timeMessage: luxon.DateTime.now().toLocaleString(this.now),
                     },
                     {
                         message: true,
-                        text: 'bene, tu?'
+                        text: 'bene, tu?',
+                        timeMessage: luxon.DateTime.now().toLocaleString(this.now),
                     },
                 ]
                 
@@ -36,17 +41,19 @@ const app = new Vue({
             {
                 id: 1,
                 name: 'Fabio',
-                lastMessage: 'ultimo messaggio',
-                timeAccess: '12.00',
+                lastMessage: '',
+                timeAccess: luxon.DateTime.now().toLocaleString(this.now),
                 image: 'avatar_2.jpg',
                 messages: [
                     {
                         message: true,
-                        text: 'ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao '
+                        text: 'ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ',
+                        timeMessage: luxon.DateTime.now().toLocaleString(this.now),
                     },
                     {
                         message: false,
-                        text: 'come stai'
+                        text: 'come stai',
+                        timeMessage: luxon.DateTime.now().toLocaleString(this.now),
                     },
                 ]
                 
@@ -55,8 +62,8 @@ const app = new Vue({
             {
                 id: 2,
                 name: 'samuele',
-                lastMessage: 'ultimo messaggio',
-                timeAccess: '12.00',
+                lastMessage: '',
+                timeAccess: luxon.DateTime.now().toLocaleString(this.now),
                 image: 'avatar_3.jpg',
                 messages: [],
                 
@@ -65,8 +72,8 @@ const app = new Vue({
             {
                 id: 3,
                 name: 'Alessandro B.',
-                lastMessage: 'ultimo messaggio',
-                timeAccess: '12.00',
+                lastMessage: '',
+                timeAccess: luxon.DateTime.now().toLocaleString(this.now),
                 image: 'avatar_4.jpg',
                 messages: [],
                 
@@ -75,8 +82,8 @@ const app = new Vue({
             {
                 id: 4,
                 name: 'Alessandro L.',
-                lastMessage: 'ultimo messaggio',
-                timeAccess: '12.00',
+                lastMessage: '',
+                timeAccess: luxon.DateTime.now().toLocaleString(this.now),
                 image: 'avatar_5.jpg',
                 messages: [],
                 
@@ -85,8 +92,8 @@ const app = new Vue({
             {
                 id: 5,
                 name: 'Titti',
-                lastMessage: 'ultimo messaggio',
-                timeAccess: '12.00',
+                lastMessage: '',
+                timeAccess: luxon.DateTime.now().toLocaleString(this.now),
                 image: 'avatar_6.jpg',
                 messages: [],
                 
@@ -95,8 +102,8 @@ const app = new Vue({
             {
                 id: 6,
                 name: 'Federico',
-                lastMessage: 'ultimo messaggio',
-                timeAccess: '12.00',
+                lastMessage: '',
+                timeAccess: luxon.DateTime.now().toLocaleString(this.now),
                 image: 'avatar_7.jpg',
                 messages: [],
 
@@ -104,8 +111,8 @@ const app = new Vue({
             {
                 id: 7,
                 name: 'Davide',
-                lastMessage: 'ultimo messaggio',
-                timeAccess: '12.00',
+                lastMessage: '',
+                timeAccess: luxon.DateTime.now().toLocaleString(this.now),
                 image: 'avatar_8.jpg',
                 messages: [],
                 
@@ -122,8 +129,6 @@ const app = new Vue({
             this.function = true
             this.arrFriends[this.selectUserIndex].messages.push({...this.object});
             this.object.text = '';
-
-
         },
         timeout() {
             setTimeout(() => {
@@ -142,7 +147,9 @@ const app = new Vue({
             this.sendMessage();
             this.timeout()
         },
+
     },
+
 })
 
 

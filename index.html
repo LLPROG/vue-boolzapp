@@ -72,8 +72,8 @@
                            {{user.name}}
                         </div>
 
-                        <div class="last-message">
-                            {{user.lastMessage}}
+                        <div v-for="(object, index) in user.messages" class="last-message" v-if="index == user.messages.length - 1">
+                            {{object.text}}
                         </div>
 
                         <div class="time-message">
@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="last-message">
-                        {{arrFriends[selectUserIndex].lastMessage + ' alle ' + arrFriends[selectUserIndex].timeAccess}}
+                        {{arrFriends[selectUserIndex].lastMessage + ' il ' + arrFriends[selectUserIndex].timeAccess}}
                     </div>
                 </div>
 
@@ -123,9 +123,6 @@
                           {{item.text}}
                         </div> 
                     </div>
-
-
-
 
                 </div>
 

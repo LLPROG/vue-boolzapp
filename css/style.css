@@ -251,6 +251,9 @@ body {
 
 .content-bar .last-message {
     color: var(--gray-text);
+    overflow: hidden;
+    width: 100%;
+
 }
 
 .content-bar .icons-selected-user {
