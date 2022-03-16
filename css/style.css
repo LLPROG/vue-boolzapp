@@ -253,7 +253,6 @@ body {
     color: var(--gray-text);
     overflow: hidden;
     width: 100%;
-
 }
 
 .content-bar .icons-selected-user {
@@ -283,7 +282,7 @@ body {
 }
 
 .content-message .user-message {
-    padding: 1rem;
+    padding: 1.2rem;
     background-color: var(--green-message);
 
     border-radius: 10px;
@@ -292,19 +291,27 @@ body {
 
     margin-left: auto;
     display: block;
-
+    position: relative;
 }
 
 .content-message .not-user-message {
-    padding: 1rem;
+    padding: 1.2rem;
     background-color: white;
 
     border-radius: 10px;
     width: 17rem;
     margin-bottom: 10px;
     display: block;
+    position: relative;
+}
 
 
+.content-message .time-message {
+    position: absolute;
+    right: 0.2rem;
+    bottom: 0.2rem;
+    font-size: 0.8em;
+    color: rgb(145, 144, 144);
 }
 
 /* class for vue*/

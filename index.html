@@ -100,8 +100,12 @@
                         {{arrFriends[selectUserIndex].name}}
                     </div>
 
-                    <div class="last-message">
-                        {{arrFriends[selectUserIndex].lastMessage + ' il ' + arrFriends[selectUserIndex].timeAccess}}
+                    <!-- <div class="last-message">
+                        {{arrFriends[selectUserIndex].lastMessage }}
+                    </div> -->
+
+                    <div v-for="(object, index) in arrFriends[selectUserIndex].messages" class="last-message" v-if="index == arrFriends[selectUserIndex].messages.length - 1">
+                        {{object.text + '  il  ' + arrFriends[selectUserIndex].timeAccess}}
                     </div>
                 </div>
 
@@ -121,6 +125,9 @@
                     <div v-for="item in arrFriends[selectUserIndex].messages"> 
                         <div :class=" (item.message == true) ? 'user-message' : 'not-user-message' ">
                           {{item.text}}
+                          <span class="time-message">
+                            {{item.timeMessage}}
+                          </span>
                         </div> 
                     </div>
 
