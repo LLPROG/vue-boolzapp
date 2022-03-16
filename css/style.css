@@ -7,7 +7,7 @@
 }
 
 html {
-    font-family: sans-serif;
+    font-family: 'Lato', sans-serif;
     font-size: 16px;
 }
 
@@ -288,6 +288,7 @@ body {
     margin-bottom: 10px;
 
     margin-left: auto;
+    display: block;
 
 }
 
@@ -298,6 +299,9 @@ body {
     border-radius: 10px;
     width: 17rem;
     margin-bottom: 10px;
+    display: block;
+
+
 }
 
 /* class for vue*/

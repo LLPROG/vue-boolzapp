@@ -64,7 +64,7 @@
             <!-- friend bar -->
             <div class="friend-bar">
 
-                <div class="friend" v-for="(user, index) in arrFriends" @click="selectUser(index)" :class="selectUserIndex == index ? 'back-color' : '' ">
+                <div class="friend" v-for="user in arrFriends" @click="selectUser(user.id)" :class="selectUserIndex == user.id ? 'back-color' : '' " :key="user.id">
                     <img :src="'img/' + user.image" alt="avatar 1">
 
                     <div class="friend-details">
@@ -118,23 +118,14 @@
             <div class="content-message">
                 <div class="row-message">
 
-                    <div class="user-message">
-                        hai portato a spasso il cane?
+                    <div v-for="item in arrFriends[selectUserIndex].messages"> 
+                        <div :class=" (item.message == true) ? 'user-message' : 'not-user-message' ">
+                          {{item.text}}
+                        </div> 
                     </div>
 
 
-                    <div class="not-user-message">
-                        tutto fatto!
-                    </div>
 
-                    
-                    <div class="user-message">
-                        hai portato a spasso il cane?
-                    </div>
-
-                    <div class="not-user-message">
-                        tutto fatto!
-                    </div>
 
                 </div>
 
@@ -143,7 +134,10 @@
             <!-- text inner message -->
             <div class="text-inner-message">
                 <i class="fa-regular fa-face-smile"></i>
-                <input type="text" class="text-message" placeholder="Scrivi un messaggio">
+
+                <!-- input message user -->
+                <input type="text" class="text-message" placeholder="Scrivi un messaggio" v-model="userValue" @keyup.enter="sendMessage()">
+                
                 <i class="fa-solid fa-microphone"></i>
             </div>
         </div>
@@ -152,7 +146,8 @@
 
 
 
-
+    <!-- luxon js -->
+    <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.1/build/global/luxon.min.js"></script>
     <!-- vue js -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <!-- my js -->
