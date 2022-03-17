@@ -1,39 +1,44 @@
 const app = new Vue({
     el: '#app',
     data: {
-        now: luxon.DateTime.now().toLocaleString(),
-        function: false,
+
+        show: 'show',
+        /// object to introduce 
         object: {
             message: true,
             text: '',
-            timeMessage: luxon.DateTime.now().toLocaleString(this.now),
+            timeMessage: '2020-01-10T15:50:00',
+            list: false,
         },
-        
-        userInput: '',
-        friendInput: '',
+
+        /// user index set on 0
         selectUserIndex: 0,
         arrFriends: [
             {
                 id: 0,
                 name: 'Michele',
                 lastMessage: '',
-                timeAccess: luxon.DateTime.now().toLocaleString(this.now) ,
+                timeAccess: '2020-01-10T15:50:00' ,
                 image: 'avatar_1.jpg',
                 messages: [
                     {
                         message: true,
                         text: 'ciao',
-                        timeMessage: luxon.DateTime.now().toLocaleString(this.now),
+                        timeMessage: '2020-01-10T15:50:00',
+                        list: false,
+
                     },
                     {
                         message: false,
                         text: 'come stai',
-                        timeMessage: luxon.DateTime.now().toLocaleString(this.now),
+                        timeMessage: '2020-01-10T15:50:00' ,
+                        list: false,
                     },
                     {
                         message: true,
                         text: 'bene, tu?',
-                        timeMessage: luxon.DateTime.now().toLocaleString(this.now),
+                        timeMessage: '2020-01-10T15:50:00' ,
+                        list: false,
                     },
                 ]
                 
@@ -42,18 +47,20 @@ const app = new Vue({
                 id: 1,
                 name: 'Fabio',
                 lastMessage: '',
-                timeAccess: luxon.DateTime.now().toLocaleString(this.now),
+                timeAccess: '2020-01-10T15:50:00' ,
                 image: 'avatar_2.jpg',
                 messages: [
                     {
                         message: true,
-                        text: 'ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ',
-                        timeMessage: luxon.DateTime.now().toLocaleString(this.now),
+                        text: 'ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao',
+                        timeMessage: '2020-01-10T15:50:00',
+                        list: false,
                     },
                     {
                         message: false,
                         text: 'come stai',
-                        timeMessage: luxon.DateTime.now().toLocaleString(this.now),
+                        timeMessage: '2020-01-10T15:50:00',
+                        list: false,
                     },
                 ]
                 
@@ -63,7 +70,7 @@ const app = new Vue({
                 id: 2,
                 name: 'samuele',
                 lastMessage: '',
-                timeAccess: luxon.DateTime.now().toLocaleString(this.now),
+                timeAccess: '2020-01-10T15:50:00' ,
                 image: 'avatar_3.jpg',
                 messages: [],
                 
@@ -73,7 +80,7 @@ const app = new Vue({
                 id: 3,
                 name: 'Alessandro B.',
                 lastMessage: '',
-                timeAccess: luxon.DateTime.now().toLocaleString(this.now),
+                timeAccess: '2020-01-10T15:50:00' ,
                 image: 'avatar_4.jpg',
                 messages: [],
                 
@@ -83,7 +90,7 @@ const app = new Vue({
                 id: 4,
                 name: 'Alessandro L.',
                 lastMessage: '',
-                timeAccess: luxon.DateTime.now().toLocaleString(this.now),
+                timeAccess: '2020-01-10T15:50:00' ,
                 image: 'avatar_5.jpg',
                 messages: [],
                 
@@ -93,7 +100,7 @@ const app = new Vue({
                 id: 5,
                 name: 'Titti',
                 lastMessage: '',
-                timeAccess: luxon.DateTime.now().toLocaleString(this.now),
+                timeAccess: '2020-01-10T15:50:00' ,
                 image: 'avatar_6.jpg',
                 messages: [],
                 
@@ -103,7 +110,7 @@ const app = new Vue({
                 id: 6,
                 name: 'Federico',
                 lastMessage: '',
-                timeAccess: luxon.DateTime.now().toLocaleString(this.now),
+                timeAccess: '2020-01-10T15:50:00' ,
                 image: 'avatar_7.jpg',
                 messages: [],
 
@@ -112,7 +119,7 @@ const app = new Vue({
                 id: 7,
                 name: 'Davide',
                 lastMessage: '',
-                timeAccess: luxon.DateTime.now().toLocaleString(this.now),
+                timeAccess: '2020-01-10T15:50:00' ,
                 image: 'avatar_8.jpg',
                 messages: [],
                 
@@ -125,11 +132,14 @@ const app = new Vue({
             this.selectUserIndex = 0;
             this.selectUserIndex += index;
         },
+
         sendMessage() {
-            this.function = true
+            let date = luxon.DateTime.now().toISO().split('.')[0]
+            this.object.timeMessage = date 
             this.arrFriends[this.selectUserIndex].messages.push({...this.object});
             this.object.text = '';
         },
+
         timeout() {
             setTimeout(() => {
                 this.object.message = false;
@@ -143,10 +153,42 @@ const app = new Vue({
             }, 1000)
 
         },
+
         functions() {
             this.sendMessage();
             this.timeout()
         },
+
+        getDate(date, format) {
+            let formatStr = '';
+            switch (format) {
+                case 'italian':
+                    formatStr = 'dd/MM/yyyy HH-mm-ss';
+                    break;
+                case 'america':
+                    formatStr = 'MM/dd/yyyy HH-mm-ss';
+                    break;
+            }
+            return luxon.DateTime.fromISO(date).toFormat(formatStr)
+        },
+
+        showHiddenList(item) {
+            if(item.list == false) {
+                item.list = true;
+                
+            } else {
+                item.list = false;
+
+            }
+        },
+
+        deleteMessage(index) {
+            this.arrFriends[this.selectUserIndex].messages.splice(index, 1);
+        },
+
+
+
+
 
     },
 

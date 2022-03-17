@@ -77,7 +77,7 @@
                         </div>
 
                         <div class="time-message">
-                            {{user.timeAccess}}
+                            {{getDate(user.timeAccess, 'italian')}}
                         </div>
                     </div>
 
@@ -90,7 +90,7 @@
         <!-- content-bar -->
         <div class="content-bar">
 
-            <!-- friend selected -->
+            <!-- friend selected top screen -->
             <div class="friend-selected">
 
                 <img :src="'img/' + arrFriends[selectUserIndex].image" alt="avatar selected">
@@ -99,10 +99,6 @@
                     <div class="friend-name">
                         {{arrFriends[selectUserIndex].name}}
                     </div>
-
-                    <!-- <div class="last-message">
-                        {{arrFriends[selectUserIndex].lastMessage }}
-                    </div> -->
 
                     <div v-for="(object, index) in arrFriends[selectUserIndex].messages" class="last-message" v-if="index == arrFriends[selectUserIndex].messages.length - 1">
                         {{object.text + '  il  ' + arrFriends[selectUserIndex].timeAccess}}
@@ -118,16 +114,29 @@
 
             </div>
 
-            <!-- content message -->
+            <!-- content messages middle screen -->
             <div class="content-message">
                 <div class="row-message">
 
-                    <div v-for="item in arrFriends[selectUserIndex].messages"> 
-                        <div :class=" (item.message == true) ? 'user-message' : 'not-user-message' ">
+                    <div v-for="(item, index) in arrFriends[selectUserIndex].messages"> 
+                        <div class="cont-message"  :class=" (item.message == true) ? 'user-message' : 'not-user-message' ">
                           {{item.text}}
                           <span class="time-message">
-                            {{item.timeMessage}}
+                            {{getDate(item.timeMessage, 'italian')}}
                           </span>
+
+                          <!-- hidden list -->
+                          <i class="fa-solid fa-angle-down" @click="showHiddenList(item)"></i>
+                          <ul class="hidden-list" :class="item.list == true ? 'show' : '' ">
+                              <li>
+                                  Info messaggio
+                              </li>
+
+                              <li @click="deleteMessage(index)">
+                                Cancella messaggio
+                            </li>
+                          </ul>
+
                         </div> 
                     </div>
 
@@ -135,7 +144,7 @@
 
             </div>
 
-            <!-- text inner message -->
+            <!-- text inner message bottom screen -->
             <div class="text-inner-message">
                 <i class="fa-regular fa-face-smile"></i>
 

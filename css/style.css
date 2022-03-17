@@ -281,28 +281,73 @@ body {
     flex-direction: column;
 }
 
-.content-message .user-message {
-    padding: 1.2rem;
-    background-color: var(--green-message);
 
+.content-message .cont-message {
+    border: 1px solid black;
+    display: block;
+    position: relative;
     border-radius: 10px;
     width: 17rem;
     margin-bottom: 10px;
+    padding: 1.2rem;
+}
 
-    margin-left: auto;
+.content-message .fa-angle-down {
+    position: absolute;
+    right: 0.4rem;
+    top: 0.2rem;
+    color: rgb(145, 144, 144);
+    font-size: 1em;
+    margin: 0;
+    display: none;
+}
+
+.cont-message:hover .fa-angle-down {
     display: block;
-    position: relative;
+
+}
+
+.content-message .user-message {
+    background-color: var(--green-message);
+    margin-left: auto;
 }
 
 .content-message .not-user-message {
-    padding: 1.2rem;
     background-color: white;
+}
 
-    border-radius: 10px;
-    width: 17rem;
-    margin-bottom: 10px;
+
+
+.content-message .hidden-list {
+    border: 1px solid black;
+    padding: 1rem;
+    position: absolute;
+    top: 95%;
+    right: 0;
+    background-color: white;
+    display: none;
+    z-index: 99999;
+}
+
+
+/* vue classes */
+
+.content-message .hidden-list.show {
     display: block;
-    position: relative;
+}
+
+/* ------ */
+
+
+.content-message .hidden-list li {
+    list-style: none;
+    cursor: pointer;
+    padding-bottom: 0.3rem;
+    z-index: 999;
+}
+
+.content-message .hidden-list li:hover {
+    color: gray;
 }
 
 
@@ -325,10 +370,9 @@ body {
     padding: 0.5rem 0;
 }
 
-.content-bar .fa-solid,
-.content-bar .fa-regular {
+.text-inner-message .fa-solid,
+.text-inner-message .fa-regular {
     margin: 0 1.5rem;
-    font-size: 1.7em;
 }
 
 .content-bar .text-message {
