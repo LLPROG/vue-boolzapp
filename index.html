@@ -22,10 +22,14 @@
 
             <!-- user account -->
             <div class="user-account">
+
                 <img src="img/avatar_io.jpg" alt="avatar user" class="user-image">
+
                 <div class="user-name">
                     Sofia
                 </div>
+
+
                 <div class="icons">
                     <i class="fa-solid fa-circle-notch"></i>
                     <i class="fa-solid fa-message"></i>
@@ -41,6 +45,7 @@
                 </div>
 
                 <div class="content-notif">
+
                     <div class="title-notif">
                         Ricevi notifiche di nuovi messaggi
                     </div>
@@ -48,7 +53,9 @@
                     <a href="#!" class="active-notif">
                         Attiva notifiche desktop
                     </a>
+
                 </div>
+
             </div>
 
             <!-- search friend bar -->
@@ -59,16 +66,19 @@
                 </div>
 
                 <input type="text" class="input-search" placeholder="Cerca o inizia una nuova chat" v-model="search" @keyup="searchFunction()">
+
             </div>
 
             <!-- friend bar -->
             <div class="friend-bar">
 
+                <!-- each singol friend  -->
                 <div class="friend" v-for="user in arrFriends" @click="selectUser(user.id)" :class="{'back-color': (selectUserIndex == user.id)}" v-show="!user.searchBool == true" :key="user.id">
                     
                     <img :src="'img/' + user.image" alt="avatar 1">
 
                     <div class="friend-details">
+
                         <div class="friend-name">
                            {{user.name}}
                         </div>
@@ -80,6 +90,7 @@
                         <div class="time-message" v-for="(object, index) in user.messages" class="last-message" v-if="index == user.messages.length - 1">
                             {{getDate(object.timeMessage, 'italian')}}
                         </div>
+
                     </div>
 
                 </div>
@@ -96,24 +107,35 @@
 
                 <img :src="'img/' + arrFriends[selectUserIndex].image" alt="avatar selected">
 
+                <!-- friend selected details -->
                 <div class="friend-details">
+
                     <div class="friend-name">
                         {{arrFriends[selectUserIndex].name}}
                     </div>
 
+                    <!-- loading type message -->
                     <div v-if="loading == true" class="load-message">
                         sta scrivendo...
                     </div>
 
-                    <div v-for="(object, index) in arrFriends[selectUserIndex].messages" class="last-message" v-if="index == arrFriends[selectUserIndex].messages.length - 1 && loading == false">
-                        {{object.text + '  il  ' + getDate(object.timeMessage, 'italian') }}
+                    <div v-else>
+
+                        <div v-for="(item, index) in arrFriends[selectUserIndex].messages" class="last-message" v-if="index == arrFriends[selectUserIndex].messages.length - 1">
+                            {{item.text + '  il  ' + getDate(item.timeMessage, 'italian') }}
+                        </div>
+
                     </div>
+
                 </div>
 
+                <!-- icons top right screen -->
                 <div class="icons-selected-user">
+
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <i class="fa-solid fa-paperclip"></i>
                     <i class="fa-solid fa-ellipsis-vertical"></i>
+
                 </div>
                 
 
@@ -121,29 +143,34 @@
 
             <!-- content messages middle screen -->
             <div class="content-message">
+
                 <div class="row-message">
 
-                    <div v-for="(item, index) in arrFriends[selectUserIndex].messages"> 
-                        <div class="cont-message"  :class=" (item.message == true) ? 'user-message' : 'not-user-message' ">
-                          {{item.text}}
-                          <span class="time-message">
-                            {{getDate(item.timeMessage, 'italian')}}
-                          </span>
+                    <div v-for="(item, index) in arrFriends[selectUserIndex].messages" class="cont-message"  :class=" (item.message == true) ? 'user-message' : 'not-user-message' ">
 
-                          <!-- hidden list -->
-                          <i class="fa-solid fa-angle-down" @click="showHiddenList(item)"></i>
-                          <ul class="hidden-list" :class="item.list == true ? 'show' : '' ">
-                              <li>
-                                  Info messaggio
-                              </li>
+                        {{item.text}}
 
-                              <li @click="deleteMessage(index)">
-                                Cancella messaggio
+                        <!-- time message  -->
+                        <span class="time-message">
+                        {{getDate(item.timeMessage, 'italian')}}
+                        </span>
+
+                        <!-- hidden list plus icon -->
+                        <i class="fa-solid fa-angle-down" @click="showHiddenList(item)"></i>
+
+                        <ul class="hidden-list" :class="item.list == true ? 'show' : '' ">
+
+                            <li>
+                                Info messaggio
                             </li>
-                          </ul>
 
-                        </div> 
-                    </div>
+                            <li @click="deleteMessage(index)">
+                            Cancella messaggio
+                            </li>
+
+                        </ul>
+
+                    </div> 
 
                 </div>
 
@@ -151,14 +178,17 @@
 
             <!-- text inner message bottom screen -->
             <div class="text-inner-message">
+
+                <!-- icon for emoji section -->
                 <i class="fa-regular fa-face-smile"></i>
 
                 <!-- input message user -->
                 <input type="text" class="text-message" placeholder="Scrivi un messaggio" v-model.trim="object.text" @keyup.enter="functions()">
                 
-
-                <i v-if="object.text !== '' " class="fa-solid fa-paper-plane"></i>
+                <!-- icons for audio message and send button -->
+                <i v-if="object.text !== '' " class="fa-solid fa-paper-plane" @click="functions()"></i>
                 <i v-else class="fa-solid fa-microphone"></i>
+
             </div>
         </div>
 
