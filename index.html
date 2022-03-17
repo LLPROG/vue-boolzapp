@@ -119,6 +119,11 @@
                         sta scrivendo...
                     </div>
 
+                    <!-- loading type message -->
+                    <div v-else-if="online == true" class="load-message">
+                        online
+                    </div>
+
                     <div v-else>
 
                         <div v-for="(item, index) in arrFriends[selectUserIndex].messages" class="last-message" v-if="index == arrFriends[selectUserIndex].messages.length - 1">
@@ -134,7 +139,13 @@
 
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <i class="fa-solid fa-paperclip"></i>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
+
+                    <i @click="deleteMenuOpen()" class="fa-solid fa-ellipsis-vertical"></i>
+
+                    <ul v-show="arrFriends[selectUserIndex].openMenu" class="hidden-list">
+                        <li @click="deleteAllMessages()">cancella tutti i messaggi</li>
+                        <li @click="deleteUser(selectUserIndex)">cancella contatto</li>
+                    </ul>
 
                 </div>
                 

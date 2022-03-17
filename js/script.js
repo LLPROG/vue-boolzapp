@@ -3,6 +3,10 @@ const app = new Vue({
     data: {
         /// loading boolean
         loading: false,
+
+        /// online mode
+        online: false,
+
         search: ''.toLowerCase(),
         show: 'show',
         /// object to introduce /// insert in arrFriend ?
@@ -43,6 +47,7 @@ const app = new Vue({
                     },
                 ],
                 searchBool: false,
+                openMenu: false
             },
             {
                 id: 1,
@@ -65,6 +70,7 @@ const app = new Vue({
                     },
                 ],
                 searchBool: false,
+                openMenu: false
 
             },
             {
@@ -75,6 +81,7 @@ const app = new Vue({
                 image: 'avatar_3.jpg',
                 messages: [],
                 searchBool: false,
+                openMenu: false
             },
             {
                 id: 3,
@@ -84,6 +91,7 @@ const app = new Vue({
                 image: 'avatar_4.jpg',
                 messages: [],
                 searchBool: false,
+                openMenu: false
             },
             {
                 id: 4,
@@ -93,6 +101,7 @@ const app = new Vue({
                 image: 'avatar_5.jpg',
                 messages: [],
                 searchBool: false,
+                openMenu: false
             },
             {
                 id: 5,
@@ -102,6 +111,7 @@ const app = new Vue({
                 image: 'avatar_6.jpg',
                 messages: [],
                 searchBool: false,
+                openMenu: false
             },
             {
                 id: 6,
@@ -111,6 +121,7 @@ const app = new Vue({
                 image: 'avatar_7.jpg',
                 messages: [],
                 searchBool: false,
+                openMenu: false
             },
             {
                 id: 7,
@@ -120,6 +131,7 @@ const app = new Vue({
                 image: 'avatar_8.jpg',
                 messages: [],
                 searchBool: false,
+                openMenu: false
             },
         ],
     },
@@ -148,6 +160,7 @@ const app = new Vue({
                 this.object.timeMessage = date 
                 this.object.message = false;
 
+                /// cit random
                 let arrAnswers = [
                     'wee da quanto tempo',
                     'scusa non posso parlare al momento',
@@ -159,13 +172,23 @@ const app = new Vue({
                 this.object.text = arrAnswers[this.getRndInteger(0, arrAnswers.length  - 1)];
 
                 this.arrFriends[this.selectUserIndex].messages.push({...this.object});
-                
+
                 this.object.message = true;
                 this.object.text = '';
 
                 this.function = false
                 this.loading = false;
-            }, 1000)
+                
+                this.online = true
+
+                setTimeout(() => {
+                    this.online = false
+                }, 3000)
+                
+
+            }, 3000);
+
+
         },
 
         functions() {
@@ -197,6 +220,21 @@ const app = new Vue({
                 item.list = false;
 
             }
+
+            console.log(item.list)
+        },
+
+        deleteMenuOpen() {
+
+            if(this.arrFriends[this.selectUserIndex].openMenu == false) {
+                this.arrFriends[this.selectUserIndex].openMenu = true;
+                
+            } else {
+                this.arrFriends[this.selectUserIndex].openMenu = false;
+
+            }
+
+            console.log(this.arrFriends[this.selectUserIndex].openMenu)
         },
 
         deleteMessage(index) {
@@ -213,6 +251,16 @@ const app = new Vue({
             })
 
         },
+
+        deleteAllMessages() {
+            this.arrFriends[this.selectUserIndex].messages = [];
+            this.arrFriends[this.selectUserIndex].openMenu = false;
+        },
+
+        deleteUser(index) {
+            this.arrFriends.splice(index, 1)
+        }
+
     },
 
 })
@@ -225,15 +273,6 @@ const app = new Vue({
 
 
 SUPER BONUSES
-
-- predisporre una lista di frasi e/o citazioni da utilizzare al posto della risposta "ok:" quando il pc risponde, anziché scrivere "ok", scegliere una frase random dalla lista e utilizzarla come testo del messaggio di risposta del pc
-
-- inserire l'orario corretto nei messaggi (v. note day.js)
-
-- sotto al nome del contatto nella parte in alto a destra, cambiare l'indicazione dello stato: visualizzare il testo "sta scrivendo..." nel timeout in cui il pc risponde, poi mantenere la scritta "online" per un paio di secondi e infine visualizzare "ultimo accesso alle xx:yy" con l'orario corretto
-
-- dare la possibilità all'utente di cancellare tutti i messaggi di un contatto o di cancellare l'intera chat con tutti i suoi dati: cliccando sull'icona con i tre pallini in alto a destra, si apre un dropdown menu in cui sono presenti le voci "Elimina messaggi" ed "Elimina chat"; cliccando su di essi si cancellano rispettivamente tutti i messaggi di quel contatto (quindi rimane la conversazione vuota) oppure l'intera chat comprensiva di tutti i dati del contatto oltre che tutti i suoi messaggi (quindi sparisce il contatto anche dalla lista di sinistra)
-
 
 - dare la possibilità all'utente di aggiungere una nuova conversazione, inserendo in un popup il nome e il link all'icona del nuovo contatto
 
