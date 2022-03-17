@@ -4,6 +4,22 @@ const app = new Vue({
         /// loading boolean
         loading: false,
 
+        newContactBool: false,
+
+        /// object for new contact
+        newContact: {
+            id: 0,
+            name: '',
+            lastMessage: '',
+            timeAccess: '',
+            image: '',
+            messages: [],
+            searchBool: false,
+            openMenu: false
+        },
+
+        popupBool: false,
+
         /// online mode
         online: false,
 
@@ -25,7 +41,7 @@ const app = new Vue({
                 name: 'Michele',
                 lastMessage: '',
                 timeAccess: '2020-01-10T15:50:00',
-                image: 'avatar_1.jpg',
+                image: 'img/avatar_1.jpg',
                 messages: [
                     {
                         message: true,
@@ -54,7 +70,7 @@ const app = new Vue({
                 name: 'Fabio',
                 lastMessage: '',
                 timeAccess: '2020-01-10T15:50:00' ,
-                image: 'avatar_2.jpg',
+                image: 'img/avatar_2.jpg',
                 messages: [
                     {
                         message: true,
@@ -78,7 +94,7 @@ const app = new Vue({
                 name: 'samuele',
                 lastMessage: '',
                 timeAccess: '2020-01-10T15:50:00' ,
-                image: 'avatar_3.jpg',
+                image: 'img/avatar_3.jpg',
                 messages: [],
                 searchBool: false,
                 openMenu: false
@@ -88,7 +104,7 @@ const app = new Vue({
                 name: 'Alessandro B.',
                 lastMessage: '',
                 timeAccess: '2020-01-10T15:50:00' ,
-                image: 'avatar_4.jpg',
+                image: 'img/avatar_4.jpg',
                 messages: [],
                 searchBool: false,
                 openMenu: false
@@ -98,7 +114,7 @@ const app = new Vue({
                 name: 'Alessandro L.',
                 lastMessage: '',
                 timeAccess: '2020-01-10T15:50:00' ,
-                image: 'avatar_5.jpg',
+                image: 'img/avatar_5.jpg',
                 messages: [],
                 searchBool: false,
                 openMenu: false
@@ -108,7 +124,7 @@ const app = new Vue({
                 name: 'Titti',
                 lastMessage: '',
                 timeAccess: '2020-01-10T15:50:00' ,
-                image: 'avatar_6.jpg',
+                image: 'img/avatar_6.jpg',
                 messages: [],
                 searchBool: false,
                 openMenu: false
@@ -118,7 +134,7 @@ const app = new Vue({
                 name: 'Federico',
                 lastMessage: '',
                 timeAccess: '2020-01-10T15:50:00' ,
-                image: 'avatar_7.jpg',
+                image: 'img/avatar_7.jpg',
                 messages: [],
                 searchBool: false,
                 openMenu: false
@@ -128,7 +144,7 @@ const app = new Vue({
                 name: 'Davide',
                 lastMessage: '',
                 timeAccess: '2020-01-10T15:50:00' ,
-                image: 'avatar_8.jpg',
+                image: 'img/avatar_8.jpg',
                 messages: [],
                 searchBool: false,
                 openMenu: false
@@ -233,8 +249,6 @@ const app = new Vue({
                 this.arrFriends[this.selectUserIndex].openMenu = false;
 
             }
-
-            console.log(this.arrFriends[this.selectUserIndex].openMenu)
         },
 
         deleteMessage(index) {
@@ -259,8 +273,46 @@ const app = new Vue({
 
         deleteUser(index) {
             this.arrFriends.splice(index, 1)
-        }
+        },
 
+        NewContact() {
+            if(this.newContactBool == false) {
+                this.newContactBool = true;
+                
+            } else {
+                this.newContactBool = false;
+
+            }
+            
+        },
+
+        addNewContact() {
+            this.newContactBool = false;
+            this.popupBool = true;
+        },
+
+        pushNewContact() {
+
+            if (!this.newContact.image.includes('https://')) {
+                alert('inserisci un link corretto per la foto')
+            } else {
+                this.newContact.id += this.arrFriends.length;
+                this.arrFriends.push({...this.newContact})
+    
+                this.newContact= {
+                    name: '',
+                    lastMessage: '',
+                    timeAccess: '',
+                    image: '',
+                    messages: [],
+                    searchBool: false,
+                    openMenu: false
+                }
+    
+                this.popupBool = false;
+            }
+
+        },
     },
 
 })
@@ -273,9 +325,6 @@ const app = new Vue({
 
 
 SUPER BONUSES
-
-- dare la possibilità all'utente di aggiungere una nuova conversazione, inserendo in un popup il nome e il link all'icona del nuovo contatto
-
 
 - fare scroll in giù in automatico fino al messaggio più recente, quando viene aggiunto un nuovo messaggio alla conversazione (NB: potrebbe esserci bisogno di utilizzare nextTick: [https://vuejs.org/v2/api/#Vue-nextTick](https://vuejs.org/v2/api/#Vue-nextTick))
 

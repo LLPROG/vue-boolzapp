@@ -101,18 +101,77 @@ body {
     padding: 0.5rem;
 }
 
-.user-image {
+.user-account .user-image {
     border-radius: 50%;
     height: 100%;
     margin-right: 0.5rem;
 }
 
-.icons {
+.user-account .icons {
     margin-left: auto;
+    position: relative;
 }
 
-.icons .fa-solid {
+.user-account .icons .fa-solid {
     margin: 0 0.5rem;
+}
+
+.user-account .hidden-list {
+    text-align: end;
+    width: 10rem;
+    padding: 1rem;
+    position: absolute;
+    top: 95%;
+    right: 0;
+
+    background-color: white;
+    z-index: 99999;
+
+    -webkit-box-shadow: 0px 1px 10px 0px #000000;
+    -moz-box-shadow: 0px 1px 10px 0px #000000;
+    -o-box-shadow: 0px 1px 10px 0px #000000;
+    box-shadow: 0px 1px 10px 0px #000000;
+}
+
+.user-account .hidden-list li {
+    list-style: none;
+    cursor: pointer;
+}
+
+.user-account .hidden-list li:hover {
+    color: gray;
+}
+
+/* add contact popup */
+
+.pupup-add-contact {
+    position: absolute;
+    top: 0;
+    left: -180px;
+
+    background-color: white;
+    padding: 1rem;
+
+    -webkit-box-shadow: 0px 1px 10px 0px #000000;
+    -moz-box-shadow: 0px 1px 10px 0px #000000;
+    -o-box-shadow: 0px 1px 10px 0px #000000;
+    box-shadow: 0px 1px 10px 0px #000000;
+}
+
+.pupup-add-contact input {
+    display: block;
+    margin-bottom: 20px;
+    padding: 0.3rem;
+    font-size: 1em;
+
+    width: 15rem;
+}
+
+.pupup-add-contact button {
+    padding: 0.3rem;
+    font-size: 1em;
+
+
 }
 
 /* notifications */

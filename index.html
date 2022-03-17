@@ -31,9 +31,26 @@
 
 
                 <div class="icons">
+
                     <i class="fa-solid fa-circle-notch"></i>
                     <i class="fa-solid fa-message"></i>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
+
+                    <i @click="NewContact()" class="fa-solid fa-ellipsis-vertical"></i>
+
+                    <ul v-show="newContactBool == true" class="hidden-list">
+                        <li @click="addNewContact()">aggiungi contatto</li>
+                    </ul>
+
+                    <!-- popup for new contact -->
+                    <div v-show="popupBool == true" class="pupup-add-contact">
+                        <input type="text" placeholder="inserisci il tuo nome" v-model="newContact.name">
+                        <input type="text" placeholder="inserisci un link per la tua foto" v-model="newContact.image">
+
+                        <button @click="pushNewContact()">
+                            invia
+                        </button>
+                    </div>
+
                 </div>
             </div>
 
@@ -75,7 +92,7 @@
                 <!-- each singol friend  -->
                 <div class="friend" v-for="user in arrFriends" @click="selectUser(user.id)" :class="{'back-color': (selectUserIndex == user.id)}" v-show="!user.searchBool == true" :key="user.id">
                     
-                    <img :src="'img/' + user.image" alt="avatar 1">
+                    <img :src="user.image" :alt="user.name">
 
                     <div class="friend-details">
 
@@ -105,7 +122,7 @@
             <!-- friend selected top screen -->
             <div class="friend-selected">
 
-                <img :src="'img/' + arrFriends[selectUserIndex].image" alt="avatar selected">
+                <img :src="arrFriends[selectUserIndex].image" :alt="arrFriends[selectUserIndex].name">
 
                 <!-- friend selected details -->
                 <div class="friend-details">
@@ -148,7 +165,6 @@
                     </ul>
 
                 </div>
-                
 
             </div>
 
