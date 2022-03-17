@@ -210,6 +210,10 @@ body {
 
 .friend-bar .last-message {
     color: var(--gray-text);
+    overflow: hidden;
+    width: 8rem;
+    height: 1.3rem;
+
 }
 
 .friend-bar .time-message {
@@ -256,7 +260,8 @@ body {
 .content-bar .last-message {
     color: var(--gray-text);
     overflow: hidden;
-    width: 100%;
+    width: 25rem;
+    height: 1.3rem;
 }
 
 .content-bar .icons-selected-user {

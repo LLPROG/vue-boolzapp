@@ -77,8 +77,8 @@
                             {{object.text}}
                         </div>
 
-                        <div class="time-message">
-                            {{getDate(user.timeAccess, 'italian')}}
+                        <div class="time-message" v-for="(object, index) in user.messages" class="last-message" v-if="index == user.messages.length - 1">
+                            {{getDate(object.timeMessage, 'italian')}}
                         </div>
                     </div>
 
@@ -102,7 +102,7 @@
                     </div>
 
                     <div v-for="(object, index) in arrFriends[selectUserIndex].messages" class="last-message" v-if="index == arrFriends[selectUserIndex].messages.length - 1">
-                        {{object.text + '  il  ' + arrFriends[selectUserIndex].timeAccess}}
+                        {{object.text + '  il  ' + getDate(object.timeMessage, 'italian') }}
                     </div>
                 </div>
 
