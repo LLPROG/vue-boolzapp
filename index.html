@@ -58,13 +58,14 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
 
-                <input type="text" class="input-search" placeholder="Cerca o inizia una nuova chat">
+                <input type="text" class="input-search" placeholder="Cerca o inizia una nuova chat" v-model="search" @keyup="searchFunction()">
             </div>
 
             <!-- friend bar -->
             <div class="friend-bar">
 
-                <div class="friend" v-for="user in arrFriends" @click="selectUser(user.id)" :class="selectUserIndex == user.id ? 'back-color' : '' " :key="user.id">
+                <div class="friend" v-for="user in arrFriends" @click="selectUser(user.id)" :class="{'back-color': (selectUserIndex == user.id)}" v-show="!user.searchBool == true" :key="user.id">
+                    
                     <img :src="'img/' + user.image" alt="avatar 1">
 
                     <div class="friend-details">

@@ -219,6 +219,10 @@ body {
     color: var(--gray-text);
 }
 
+.friend-bar .friend.hidden {
+    display: none;
+}
+
 /* content bar */
 
 .content-bar>* {

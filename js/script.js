@@ -1,7 +1,7 @@
 const app = new Vue({
     el: '#app',
     data: {
-
+        search: ''.toLowerCase(),
         show: 'show',
         /// object to introduce 
         object: {
@@ -9,6 +9,7 @@ const app = new Vue({
             text: '',
             timeMessage: '2020-01-10T15:50:00',
             list: false,
+
         },
 
         /// user index set on 0
@@ -40,8 +41,8 @@ const app = new Vue({
                         timeMessage: '2020-01-10T15:50:00' ,
                         list: false,
                     },
-                ]
-                
+                ],
+                searchBool: false,
             },
             {
                 id: 1,
@@ -62,8 +63,8 @@ const app = new Vue({
                         timeMessage: '2020-01-10T15:50:00',
                         list: false,
                     },
-                ]
-                
+                ],
+                searchBool: false,
 
             },
             {
@@ -73,7 +74,7 @@ const app = new Vue({
                 timeAccess: '2020-01-10T15:50:00' ,
                 image: 'avatar_3.jpg',
                 messages: [],
-                
+                searchBool: false,
 
             },
             {
@@ -83,7 +84,7 @@ const app = new Vue({
                 timeAccess: '2020-01-10T15:50:00' ,
                 image: 'avatar_4.jpg',
                 messages: [],
-                
+                searchBool: false,
 
             },
             {
@@ -93,7 +94,7 @@ const app = new Vue({
                 timeAccess: '2020-01-10T15:50:00' ,
                 image: 'avatar_5.jpg',
                 messages: [],
-                
+                searchBool: false,
 
             },
             {
@@ -103,7 +104,7 @@ const app = new Vue({
                 timeAccess: '2020-01-10T15:50:00' ,
                 image: 'avatar_6.jpg',
                 messages: [],
-                
+                searchBool: false,
 
             },
             {
@@ -113,7 +114,7 @@ const app = new Vue({
                 timeAccess: '2020-01-10T15:50:00' ,
                 image: 'avatar_7.jpg',
                 messages: [],
-
+                searchBool: false,
             },
             {
                 id: 7,
@@ -122,7 +123,7 @@ const app = new Vue({
                 timeAccess: '2020-01-10T15:50:00' ,
                 image: 'avatar_8.jpg',
                 messages: [],
-                
+                searchBool: false,
 
             },
         ],
@@ -185,11 +186,17 @@ const app = new Vue({
         deleteMessage(index) {
             this.arrFriends[this.selectUserIndex].messages.splice(index, 1);
         },
+        searchFunction() {
+            this.arrFriends.forEach( (el) => {
+                if(!el.name.toLowerCase().includes(this.search)) {
+                    el.searchBool = true;
+                } else {
+                    el.searchBool = false;
 
+                }
+            })
 
-
-
-
+        },
     },
 
 })
@@ -202,14 +209,13 @@ const app = new Vue({
 
 Milestone 2
 
-Visualizzazione dinamica dei messaggi: tramite la direttiva v-for, visualizzare tutti i messaggi relativi al contatto attivo all’interno del pannello della conversazione
-Click sul contatto mostra la conversazione del contatto cliccato
+Milestone 4
 
-Milestone 3
+Ricerca utenti: scrivendo qualcosa nell’input a sinistra, vengono visualizzati solo i contatti il cui nome contiene le lettere inserite (es, Marco, Matteo Martina -> Scrivo “mar” rimangono solo Marco e Martina)
 
-Aggiunta di un messaggio: l’utente scrive un testo nella parte bassa e digitando “enter” il testo viene aggiunto al thread sopra, come messaggio verde
-Risposta dall’interlocutore: ad ogni inserimento di un messaggio, l’utente riceverà un “ok” come risposta, che apparirà dopo 1 secondo.
-Consiglio
-Pensate bene a come strutturare i dati prima di implementare il codice.
+Milestone 5
+
+Cancella messaggio: cliccando sul messaggio appare un menu a tendina che permette di cancellare il messaggio selezionato
+Visualizzazione ora e ultimo messaggio inviato/ricevuto nella lista dei contatti
 
 */
