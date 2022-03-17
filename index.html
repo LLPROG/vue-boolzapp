@@ -101,7 +101,11 @@
                         {{arrFriends[selectUserIndex].name}}
                     </div>
 
-                    <div v-for="(object, index) in arrFriends[selectUserIndex].messages" class="last-message" v-if="index == arrFriends[selectUserIndex].messages.length - 1">
+                    <div v-if="loading == true" class="load-message">
+                        sta scrivendo...
+                    </div>
+
+                    <div v-for="(object, index) in arrFriends[selectUserIndex].messages" class="last-message" v-if="index == arrFriends[selectUserIndex].messages.length - 1 && loading == false">
                         {{object.text + '  il  ' + getDate(object.timeMessage, 'italian') }}
                     </div>
                 </div>
@@ -150,9 +154,11 @@
                 <i class="fa-regular fa-face-smile"></i>
 
                 <!-- input message user -->
-                <input type="text" class="text-message" placeholder="Scrivi un messaggio" v-model="object.text" @keyup.enter="functions()">
+                <input type="text" class="text-message" placeholder="Scrivi un messaggio" v-model.trim="object.text" @keyup.enter="functions()">
                 
-                <i class="fa-solid fa-microphone"></i>
+
+                <i v-if="object.text !== '' " class="fa-solid fa-paper-plane"></i>
+                <i v-else class="fa-solid fa-microphone"></i>
             </div>
         </div>
 

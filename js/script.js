@@ -1,9 +1,11 @@
 const app = new Vue({
     el: '#app',
     data: {
+        /// loading boolean
+        loading: false,
         search: ''.toLowerCase(),
         show: 'show',
-        /// object to introduce 
+        /// object to introduce /// insert in arrFriend ?
         object: {
             message: true,
             text: '',
@@ -19,7 +21,7 @@ const app = new Vue({
                 id: 0,
                 name: 'Michele',
                 lastMessage: '',
-                timeAccess: '2020-01-10T15:50:00' ,
+                timeAccess: '2020-01-10T15:50:00',
                 image: 'avatar_1.jpg',
                 messages: [
                     {
@@ -27,7 +29,6 @@ const app = new Vue({
                         text: 'ciao',
                         timeMessage: '2020-01-10T15:50:00',
                         list: false,
-
                     },
                     {
                         message: false,
@@ -53,13 +54,13 @@ const app = new Vue({
                 messages: [
                     {
                         message: true,
-                        text: 'ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao ciao',
+                        text: 'sei andato a mare oggi?',
                         timeMessage: '2020-01-10T15:50:00',
                         list: false,
                     },
                     {
                         message: false,
-                        text: 'come stai',
+                        text: 'no sono a lavoro',
                         timeMessage: '2020-01-10T15:50:00',
                         list: false,
                     },
@@ -75,7 +76,6 @@ const app = new Vue({
                 image: 'avatar_3.jpg',
                 messages: [],
                 searchBool: false,
-
             },
             {
                 id: 3,
@@ -85,7 +85,6 @@ const app = new Vue({
                 image: 'avatar_4.jpg',
                 messages: [],
                 searchBool: false,
-
             },
             {
                 id: 4,
@@ -95,7 +94,6 @@ const app = new Vue({
                 image: 'avatar_5.jpg',
                 messages: [],
                 searchBool: false,
-
             },
             {
                 id: 5,
@@ -105,7 +103,6 @@ const app = new Vue({
                 image: 'avatar_6.jpg',
                 messages: [],
                 searchBool: false,
-
             },
             {
                 id: 6,
@@ -124,7 +121,6 @@ const app = new Vue({
                 image: 'avatar_8.jpg',
                 messages: [],
                 searchBool: false,
-
             },
         ],
     },
@@ -139,6 +135,7 @@ const app = new Vue({
             this.object.timeMessage = date 
             this.arrFriends[this.selectUserIndex].messages.push({...this.object});
             this.object.text = '';
+            this.loading = true;
         },
 
         timeout() {
@@ -153,13 +150,16 @@ const app = new Vue({
                 this.object.message = true;
                 this.object.text = '';
                 this.function = false
-            }, 1000)
-
+                this.loading = false;
+            }, 3000)
         },
 
         functions() {
-            this.sendMessage();
-            this.timeout()
+            if (this.object.text != '') {
+                this.sendMessage();
+                this.timeout()
+            }
+
         },
 
         getDate(date, format) {
@@ -188,6 +188,7 @@ const app = new Vue({
         deleteMessage(index) {
             this.arrFriends[this.selectUserIndex].messages.splice(index, 1);
         },
+
         searchFunction() {
             this.arrFriends.forEach( (el) => {
                 if(!el.name.toLowerCase().includes(this.search)) {
@@ -210,13 +211,11 @@ const app = new Vue({
 /*
 
 
-Cancella messaggio: cliccando sul messaggio appare un menu a tendina che permette di cancellare il messaggio selezionato
-Visualizzazione ora e ultimo messaggio inviato/ricevuto nella lista dei contatti
-
 SUPER BONUSES
-Funzionalità
-- evitare che l'utente possa inviare un messaggio vuoto o composto solamente da spazi
+
 - A) cambiare icona in basso a destra (a fianco all'input per scrivere un nuovo messaggio) finché l'utente sta scrivendo: di default si visualizza l'icona del microfono, quando l'input non è vuoto si visualizza l'icona dell'aeroplano. Quando il messaggio è stato inviato e l'input si svuota, si torna a visualizzare il microfono.
+
+
 B) inviare quindi il messaggio anche cliccando sull'icona dell'aeroplano
 - predisporre una lista di frasi e/o citazioni da utilizzare al posto della risposta "ok:" quando il pc risponde, anziché scrivere "ok", scegliere una frase random dalla lista e utilizzarla come testo del messaggio di risposta del pc
 - visualizzare nella lista dei contatti l'ultimo messaggio inviato/ricevuto da ciascun contatto
