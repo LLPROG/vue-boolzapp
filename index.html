@@ -100,8 +100,8 @@
                            {{user.name}}
                         </div>
 
-                        <div v-for="(object, index) in user.messages" class="last-message" v-if="index == user.messages.length - 1">
-                            {{object.text}}
+                        <div v-for="(message, index) in user.messages" class="last-message" v-if="index == user.messages.length - 1">
+                            {{message.text}}
                         </div>
 
                         <div class="time-message" v-for="(object, index) in user.messages" class="last-message" v-if="index == user.messages.length - 1">
@@ -132,12 +132,12 @@
                     </div>
 
                     <!-- loading type message -->
-                    <div v-if="loading == true" class="load-message">
+                    <div v-if="arrFriends[selectUserIndex].loading == true" class="load-message">
                         sta scrivendo...
                     </div>
 
                     <!-- loading type message -->
-                    <div v-else-if="online == true" class="load-message">
+                    <div v-else-if="arrFriends[selectUserIndex].online == true" class="load-message">
                         online
                     </div>
 
@@ -210,10 +210,10 @@
                 <i class="fa-regular fa-face-smile"></i>
 
                 <!-- input message user -->
-                <input type="text" class="text-message" placeholder="Scrivi un messaggio" v-model.trim="object.text" @keyup.enter="functions()">
+                <input type="text" class="text-message" placeholder="Scrivi un messaggio" v-model.trim="arrFriends[selectUserIndex].object.text" @keyup.enter="sendMessage()">
                 
                 <!-- icons for audio message and send button -->
-                <i v-if="object.text !== '' " class="fa-solid fa-paper-plane" @click="functions()"></i>
+                <i v-if="arrFriends[selectUserIndex].object.text !== '' " class="fa-solid fa-paper-plane" @click="sendMessage()"></i>
                 <i v-else class="fa-solid fa-microphone"></i>
 
             </div>

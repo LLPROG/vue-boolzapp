@@ -1,8 +1,7 @@
 const app = new Vue({
     el: '#app',
     data: {
-        /// loading boolean
-        loading: false,
+
 
         newContactBool: false,
 
@@ -20,18 +19,17 @@ const app = new Vue({
 
         popupBool: false,
 
-        /// online mode
-        online: false,
+
 
         search: ''.toLowerCase(),
         show: 'show',
-        /// object to introduce /// insert in arrFriend ?
-        object: {
-            message: true,
-            text: '',
-            timeMessage: '',
-            list: false,
-        },
+
+        // object: {
+        //     message: true,
+        //     text: '',
+        //     timeMessage: '',
+        //     list: false,
+        // },
 
         /// user index set on 0
         selectUserIndex: 0,
@@ -63,7 +61,18 @@ const app = new Vue({
                     },
                 ],
                 searchBool: false,
-                openMenu: false
+                openMenu: false,
+                /// loading boolean
+                loading: false,
+                /// online mode
+                online: false,
+
+                object: {
+                    message: true,
+                    text: '',
+                    timeMessage: '',
+                    list: false,
+                }
             },
             {
                 id: 1,
@@ -86,8 +95,17 @@ const app = new Vue({
                     },
                 ],
                 searchBool: false,
-                openMenu: false
-
+                openMenu: false,
+                /// loading boolean
+                loading: false,
+                /// online mode
+                online: false,
+                object: {
+                    message: true,
+                    text: '',
+                    timeMessage: '',
+                    list: false,
+                }
             },
             {
                 id: 2,
@@ -97,7 +115,18 @@ const app = new Vue({
                 image: 'img/avatar_3.jpg',
                 messages: [],
                 searchBool: false,
-                openMenu: false
+                openMenu: false,
+                /// loading boolean
+                loading: false,
+                /// online mode
+                online: false,
+                object: {
+                    message: true,
+                    text: '',
+                    timeMessage: '',
+                    list: false,
+                }
+    
             },
             {
                 id: 3,
@@ -107,7 +136,17 @@ const app = new Vue({
                 image: 'img/avatar_4.jpg',
                 messages: [],
                 searchBool: false,
-                openMenu: false
+                openMenu: false,
+                /// loading boolean
+                loading: false,
+                /// online mode
+                online: false,
+                object: {
+                    message: true,
+                    text: '',
+                    timeMessage: '',
+                    list: false,
+                }
             },
             {
                 id: 4,
@@ -117,7 +156,17 @@ const app = new Vue({
                 image: 'img/avatar_5.jpg',
                 messages: [],
                 searchBool: false,
-                openMenu: false
+                openMenu: false,
+                /// loading boolean
+                loading: false,
+                /// online mode
+                online: false,
+                object: {
+                    message: true,
+                    text: '',
+                    timeMessage: '',
+                    list: false,
+                }
             },
             {
                 id: 5,
@@ -127,7 +176,17 @@ const app = new Vue({
                 image: 'img/avatar_6.jpg',
                 messages: [],
                 searchBool: false,
-                openMenu: false
+                openMenu: false,
+                /// loading boolean
+                loading: false,
+                /// online mode
+                online: false,
+                object: {
+                    message: true,
+                    text: '',
+                    timeMessage: '',
+                    list: false,
+                }
             },
             {
                 id: 6,
@@ -137,7 +196,17 @@ const app = new Vue({
                 image: 'img/avatar_7.jpg',
                 messages: [],
                 searchBool: false,
-                openMenu: false
+                openMenu: false,
+                /// loading boolean
+                loading: false,
+                /// online mode
+                online: false,
+                object: {
+                    message: true,
+                    text: '',
+                    timeMessage: '',
+                    list: false,
+                }
             },
             {
                 id: 7,
@@ -147,7 +216,17 @@ const app = new Vue({
                 image: 'img/avatar_8.jpg',
                 messages: [],
                 searchBool: false,
-                openMenu: false
+                openMenu: false,
+                /// loading boolean
+                loading: false,
+                /// online mode
+                online: false,
+                object: {
+                    message: true,
+                    text: '',
+                    timeMessage: '',
+                    list: false,
+                }
             },
         ],
     },
@@ -155,26 +234,28 @@ const app = new Vue({
         selectUser(index) {
             this.selectUserIndex = 0;
             this.selectUserIndex += index;
-            this.object.text = '';
         },
 
         sendMessage() {
-            let date = luxon.DateTime.now().toISO().split('.')[0]
-            this.object.timeMessage = date 
-            this.arrFriends[this.selectUserIndex].messages.push({...this.object});
-            this.object.text = '';
-            this.loading = true;
-        },
+            let element = this.arrFriends[this.selectUserIndex];
 
-        getRndInteger(min, max) {
-            return Math.floor(Math.random() * (max - min + 1) ) + min;
-        },
-
-        timeoutAnswer() {
-            setTimeout(() => {
+            if (element.object.text != '') {
                 let date = luxon.DateTime.now().toISO().split('.')[0]
-                this.object.timeMessage = date 
-                this.object.message = false;
+                element.object.timeMessage = date 
+                element.messages.push({...element.object});
+                element.object.text = '';
+                element.loading = true;
+                this.timeoutAnswer(this.selectUserIndex)
+            }
+        },
+        
+        timeoutAnswer(chatIndex) {
+            setTimeout(() => {
+                let element = this.arrFriends[chatIndex];
+
+                let date = luxon.DateTime.now().toISO().split('.')[0]
+                element.object.timeMessage = date 
+                element.object.message = false;
 
                 /// cit random
                 let arrAnswers = [
@@ -185,34 +266,27 @@ const app = new Vue({
                     'finalmente ti fai sentire'
                 ]
 
-                this.object.text = arrAnswers[this.getRndInteger(0, arrAnswers.length  - 1)];
+                element.object.text = arrAnswers[this.getRndInteger(0, arrAnswers.length  - 1)];
 
-                this.arrFriends[this.selectUserIndex].messages.push({...this.object});
+                element.messages.push({...element.object});
 
-                this.object.message = true;
-                this.object.text = '';
+                element.object.message = true;
+                element.object.text = '';
 
-                this.function = false
-                this.loading = false;
-                
-                this.online = true
+                // this.function = false
+                element.loading = false;
+                element.online = true
 
                 setTimeout(() => {
-                    this.online = false
+                    element.online = false
                 }, 3000)
                 
 
             }, 3000);
-
-
         },
 
-        functions() {
-            if (this.object.text != '') {
-                this.sendMessage();
-                this.timeoutAnswer()
-            }
-
+        getRndInteger(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) ) + min;
         },
 
         getDate(date, format) {
@@ -231,23 +305,19 @@ const app = new Vue({
         showHiddenList(item) {
             if(item.list == false) {
                 item.list = true;
-                
             } else {
                 item.list = false;
-
             }
 
             console.log(item.list)
         },
 
         deleteMenuOpen() {
-
             if(this.arrFriends[this.selectUserIndex].openMenu == false) {
                 this.arrFriends[this.selectUserIndex].openMenu = true;
                 
             } else {
                 this.arrFriends[this.selectUserIndex].openMenu = false;
-
             }
         },
 
@@ -281,9 +351,7 @@ const app = new Vue({
                 
             } else {
                 this.newContactBool = false;
-
             }
-            
         },
 
         addNewContact() {
@@ -313,6 +381,7 @@ const app = new Vue({
             }
 
         },
+
     },
 
 })
