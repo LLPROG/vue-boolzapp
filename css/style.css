@@ -378,12 +378,13 @@ body {
 
 
 .content-message .cont-message {
-    display: block;
     position: relative;
     border-radius: 10px;
     width: 17rem;
     margin-bottom: 10px;
     padding: 1.2rem;
+    border: 1px solid black;
+    flex-grow: auto;
 }
 
 .content-message .fa-angle-down {

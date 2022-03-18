@@ -2,8 +2,9 @@ const app = new Vue({
     el: '#app',
     data: {
 
-
-        newContactBool: false,
+        return: {
+            count: 5
+          },
 
         /// object for new contact
         newContact: {
@@ -14,22 +15,24 @@ const app = new Vue({
             image: '',
             messages: [],
             searchBool: false,
-            openMenu: false
+            openMenu: false,
+            openMenu: false,
+            /// loading boolean
+            loading: false,
+            /// online mode
+            object: {
+                message: true,
+                text: '',
+                timeMessage: '',
+                list: false,
+            }
         },
 
+        newContactBool: false,
         popupBool: false,
-
-
 
         search: ''.toLowerCase(),
         show: 'show',
-
-        // object: {
-        //     message: true,
-        //     text: '',
-        //     timeMessage: '',
-        //     list: false,
-        // },
 
         /// user index set on 0
         selectUserIndex: 0,
@@ -43,7 +46,7 @@ const app = new Vue({
                 messages: [
                     {
                         message: true,
-                        text: 'ciao',
+                        text: 'ciao ',
                         timeMessage: '2020-01-10T15:50:00',
                         list: false,
                     },
@@ -59,6 +62,7 @@ const app = new Vue({
                         timeMessage: '2020-01-10T15:50:00' ,
                         list: false,
                     },
+                    
                 ],
                 searchBool: false,
                 openMenu: false,
@@ -382,8 +386,14 @@ const app = new Vue({
 
         },
 
+        scrollToBottom() {
+            const container = document.querySelector('.content-message')
+            container.scrollTop = container.scrollHeight;
+        }
     },
-
+    updated() {
+        this.scrollToBottom();
+    }
 })
 
 
